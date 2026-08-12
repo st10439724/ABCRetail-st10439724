@@ -1,0 +1,40 @@
+@model string
+
+@{
+    ViewData["Title"] = "View Log - " + ViewBag.FileName;
+}
+
+<div class="container">
+    <h1 class="mt-4">View Log File</h1>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+            <h5>@ViewBag.FileName</h5>
+            <p class="text-muted">
+                Size: @string.Format("{0:N0}", ViewBag.FileSize) bytes | 
+                Lines: @ViewBag.LineCount
+            </p>
+        </div>
+        <div>
+            <a href="@Url.Action("Download", new { fileName = ViewBag.FileName })" class="btn btn-success">Download</a>
+            <a href="@Url.Action("Index")" class="btn btn-secondary">Back to Logs</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <span>Log Content</span>
+        </div>
+        <div class="card-body">
+            @if (!string.IsNullOrEmpty(Model))
+            {
+                <pre style="background-color: #1e1e1e; color: #d4d4d4; padding: 15px; border-radius: 5px; overflow-x: auto; max-height: 600px; font-size: 14px; white-space: pre-wrap; word-wrap: break-word;">@Model</pre>
+            }
+            else
+            {
+                <div class="text-center py-4">
+                    <p class="text-muted">Log file is empty.</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>

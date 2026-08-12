@@ -1,0 +1,29 @@
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="px-4 py-5 text-center bg-dark text-white rounded mb-4">
+    <h1 class="display-5 fw-bold">Welcome to ABC Retail</h1>
+    <p class="lead">Manage your customer profiles and product catalogue from one place.</p>
+</div>
+
+<div class="row g-4 mt-2">
+    <div class="col-md-6">
+        <div class="card shadow-sm h-100">
+            <div class="card-body text-center p-4">
+                <h2 class="card-title">👤 Customer Profiles</h2>
+                <p class="card-text text-muted">View, add, update, and remove customer records stored securely in Azure Table Storage.</p>
+                <a asp-controller="CustomerProfile" asp-action="Index" class="btn btn-dark btn-lg mt-2">Manage Customers</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card shadow-sm h-100">
+            <div class="card-body text-center p-4">
+                <h2 class="card-title">📦 Products</h2>
+                <p class="card-text text-muted">Browse and manage product listings. Product images are stored in Azure Blob Storage.</p>
+                <a asp-controller="Product" asp-action="Index" class="btn btn-dark btn-lg mt-2">Manage Products</a>
+            </div>
+        </div>
+    </div>
+</div>

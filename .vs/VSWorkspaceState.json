@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\ABCRetail",
+    "\\ABCRetail\\Properties",
+    "\\ABCRetail\\Views",
+    "\\ABCRetail\\Views\\Customer",
+    "\\ABCRetail\\Views\\CustomerProfile",
+    "\\ABCRetail\\Views\\Logs",
+    "\\ABCRetail\\Views\\Queue",
+    "\\ABCRetail\\Views\\Shared",
+    "\\ABCRetail\\wwwroot"
+  ],
+  "SelectedNode": "\\ABCRetail\\Services\\FileStorageService.cs",
+  "PreviewInSolutionExplorer": false
+}

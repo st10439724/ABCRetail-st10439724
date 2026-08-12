@@ -1,0 +1,27 @@
+@model ABCRetail.Models.CustomerProfile
+@{
+    ViewData["Title"] = "Delete Customer";
+}
+
+<h2 class="mb-4 text-danger">Delete Customer</h2>
+
+<div class="card shadow-sm p-4" style="max-width:500px;">
+    <p>Are you sure you want to delete the following customer profile?</p>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-4">Name</dt>
+        <dd class="col-sm-8">@Model.FirstName @Model.LastName</dd>
+        <dt class="col-sm-4">Email</dt>
+        <dd class="col-sm-8">@Model.Email</dd>
+        <dt class="col-sm-4">City</dt>
+        <dd class="col-sm-8">@Model.City</dd>
+    </dl>
+    <form asp-action="Delete" method="post">
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="rowKey" value="@Model.RowKey" />
+        <div class="d-flex gap-2 mt-3">
+            <button type="submit" class="btn btn-danger">Yes, Delete</button>
+            <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+        </div>
+    </form>
+</div>

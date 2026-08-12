@@ -1,0 +1,90 @@
+@model List<dynamic>
+
+@{
+    ViewData["Title"] = "Log Files";
+}
+
+<div class="container">
+    <h1 class="mt-4">📄 Application Logs</h1>
+    <p class="lead">View and manage log files stored in Azure Files.</p>
+
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Log Information</h5>
+                    <p><strong>Share Name:</strong> logs</p>
+                    <p><strong>Directory:</strong> application</p>
+                    <p><strong>Total Log Files:</strong> @ViewBag.TotalLogs</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Log Actions</h5>
+                    <form asp-action="CreateTestLog" method="post" style="display:inline;">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-primary btn-sm">Create Test Log</button>
+                    </form>
+                    <a href="@Url.Action("Index", "Home")" class="btn btn-secondary btn-sm">Back to Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mt-3">
+        <div class="card-header">
+            <h5>Log Files (@(Model?.Count ?? 0) files)</h5>
+        </div>
+        <div class="card-body">
+            @if (Model != null && Model.Any())
+            {
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>File Name</th>
+                                <th>Size (bytes)</th>
+                                <th>Last Modified</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int index = 1;
+                                foreach (var file in Model)
+                                {
+                                    <tr>
+                                        <td>@index</td>
+                                        <td>@file.Name</td>
+                                        <td>@string.Format("{0:N0}", file.Size)</td>
+                                        <td>@file.LastModified.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                                        <td>
+                                            <a href="@Url.Action("ViewLog", new { fileName = file.Name })" class="btn btn-info btn-sm">View</a>
+                                            <a href="@Url.Action("Download", new { fileName = file.Name })" class="btn btn-success btn-sm">Download</a>
+                                            <form asp-action="Delete" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this log file?')">
+                                                @Html.AntiForgeryToken()
+                                                <input type="hidden" name="fileName" value="@file.Name" />
+                                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    index++;
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <div class="text-center py-4">
+                    <p class="text-muted">No log files found.</p>
+                    <p>Click "Createe Test Logs" to generate a sample log file.</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,51 @@
+@model ABCRetail.Models.CustomerProfile
+@{
+    ViewData["Title"] = "Edit Customer";
+}
+
+<h2 class="mb-4">Edit Customer</h2>
+
+<div class="card shadow-sm p-4" style="max-width:600px;">
+    <form asp-action="Edit" method="post">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="RowKey" />
+        <input type="hidden" asp-for="PartitionKey" />
+        <input type="hidden" asp-for="ETag" />
+        <input type="hidden" asp-for="DateRegistered" />
+
+        <div class="mb-3">
+            <label asp-for="FirstName" class="form-label fw-semibold"></label>
+            <input asp-for="FirstName" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="LastName" class="form-label fw-semibold"></label>
+            <input asp-for="LastName" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Email" class="form-label fw-semibold"></label>
+            <input asp-for="Email" type="email" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Phone" class="form-label fw-semibold"></label>
+            <input asp-for="Phone" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Address" class="form-label fw-semibold"></label>
+            <input asp-for="Address" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="City" class="form-label fw-semibold"></label>
+            <input asp-for="City" class="form-control" />
+        </div>
+
+        <div class="d-flex gap-2 mt-3">
+            <button type="submit" class="btn btn-dark">Update Customer</button>
+            <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
